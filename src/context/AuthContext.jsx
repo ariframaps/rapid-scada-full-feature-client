@@ -2,22 +2,24 @@ import { createContext, useContext, useReducer } from "react";
 import { AuthReducer } from "./reducer/AuthReducer";
 import { sendEmail } from "../helper/SendEmail";
 
-// const checkLogin = async () => {
-//   try {
-//     const res = await fetch("/api/Api/Main/GetCurData?cnlNums=101", {
-//       credentials: "include", // penting! biar kirim cookie-nya
-//     });
+const checkLogin = async () => {
+  try {
+    const res = await fetch("/api/api/auth/user", {
+      credentials: "include", // penting! biar kirim cookie-nya
+    });
 
-//     if (res.status === 200) {
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   } catch (err) {
-//     console.error("Login Error");
-//     return false;
-//   }
-// };
+    if (res.status === 200) {
+      const data = await res.json();
+      console.log(data.user);
+      return data.user;
+    } else {
+      return false;
+    }
+  } catch (err) {
+    console.error("Login Error");
+    return false;
+  }
+};
 
 const initialState = {
   isLoggedIn: await checkLogin(),
@@ -37,9 +39,9 @@ export const AuthProvider = ({ children }) => {
     });
 
     const data = await res.json();
-    if (data.ok) {
+    if (res.status == 200) {
       console.log("Login berhasil");
-      sendEmail();
+      // sendEmail();
     } else {
       throw new Error("Login gagal");
     }
@@ -58,14 +60,13 @@ export const AuthProvider = ({ children }) => {
   }
 
   async function setLoggedOut() {
-    const res = await fetch("/api/Api/Auth/Logout", {
+    const res = await fetch("/api/api/auth/logout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
 
-    const data = await res.json();
-    if (data.ok) {
+    if (res.status == 200) {
       console.log("Logout berhasil");
       window.location.reload();
     } else {
