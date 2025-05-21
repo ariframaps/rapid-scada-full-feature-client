@@ -23,17 +23,6 @@ const NavBar = () => {
           Valve
         </span>
       </NavbarBrand>
-      {/* <div className="flex order-2 sm:px-3"> */}
-      {/* {isLoggedIn && (
-          <Button
-            onClick={setLoggedOut}
-            size="sm"
-            className="text-xs border-blue-300 text-blue-700"
-            color={"alternative"}>
-            Logout
-          </Button>
-        )} */}
-      {/* </div> */}
       {isLoggedIn && <NavbarToggle />}
       <NavbarCollapse className="gap-2">
         <NavbarLink

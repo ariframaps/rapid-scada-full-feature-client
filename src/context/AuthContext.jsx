@@ -38,7 +38,6 @@ export const AuthProvider = ({ children }) => {
       body: JSON.stringify({ username, password }),
     });
 
-    const data = await res.json();
     if (res.status == 200) {
       console.log("Login berhasil");
       // sendEmail();
@@ -46,15 +45,17 @@ export const AuthProvider = ({ children }) => {
       throw new Error("Login gagal");
     }
 
+    const data = await res.json();
+
     setTimeout(() => {
       setLoggedOut();
       alert("Sesi anda telah habis, silahkan login kembali");
-    }, 1800000);
+    }, 30 * 60 * 1000);
 
     dispatch({
       type: "LOGGED_IN",
       payload: {
-        isLoggedIn: true,
+        isLoggedIn: data,
       },
     });
   }

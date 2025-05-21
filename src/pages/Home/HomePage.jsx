@@ -73,7 +73,7 @@ const HomePage = () => {
       }
 
       fetchData(); // polling
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(interval); // cleanup!
   }, [openAll, closeAll]);
