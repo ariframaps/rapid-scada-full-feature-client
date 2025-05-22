@@ -26,7 +26,6 @@ const SchedulePage = () => {
   const [selectedGate, setSelectedGate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [selectedValue, setSelectedValue] = useState(0);
-  console.log(scheduleList);
 
   useEffect(() => {
     if (!isLoggedIn) setLoggedOut();
@@ -51,7 +50,6 @@ const SchedulePage = () => {
         const data1 = await res1.json();
         const data2 = await res2.json();
 
-        console.log(data1, data2);
         setGatesData(data1.gates);
         setScheduleList(data2.schedules);
       } catch (err) {
@@ -66,9 +64,6 @@ const SchedulePage = () => {
 
   async function handleAddSchedule(e) {
     e.preventDefault();
-    console.log(e.target.gates.value);
-    console.log(e.target.time.value);
-    console.log(e.target.value.value);
 
     if (
       !e.target.gates.value ||
@@ -142,7 +137,6 @@ const SchedulePage = () => {
         console.error("Gagal menambah jadwal baru");
         setErrorMessage("Gagal menambah jadwal baru, silahkan coba lagi.");
         setIsLoading(false);
-        console.log(err.message);
         alert(`Gagal menyimpan perubahan`);
       }
     } else {
@@ -199,9 +193,9 @@ const SchedulePage = () => {
           onSubmit={handleAddSchedule}
           className="text-start flex flex-col sm:flex-row justify-between gap-10 gap-y-3 p-3 sm:p-5 rounded-lg bg-slate-100">
           <div className="flex justify-between flex-1">
-            <div className="w-max min-w-32">
+            <div className="w-max min-w-24 sm:min-w-32">
               <div className="mb-2 block">
-                <Label htmlFor="countries">Pilih Embung</Label>
+                <Label htmlFor="countries">Embung</Label>
               </div>
               <Select
                 id="gates"
@@ -209,7 +203,7 @@ const SchedulePage = () => {
                 onChange={(e) => setSelectedGate(e.target.value)}
                 required>
                 <option value="" hidden>
-                  Pilih embung
+                  Pilih
                 </option>
                 {gatesData &&
                   gatesData.map((gate) => (
@@ -219,7 +213,7 @@ const SchedulePage = () => {
                   ))}
               </Select>
             </div>
-            <div className="max-w-[8rem]">
+            <div className="max-w-[7rem]">
               <div className="mb-2 block">
                 <Label htmlFor="value">Pilih Jam:</Label>
               </div>
@@ -250,9 +244,9 @@ const SchedulePage = () => {
                 />
               </div>
             </div>
-            <div className="w-min min-w-16 sm:min-w-24">
+            <div className="w-min min-w-14 sm:min-w-24">
               <div className="mb-2 block">
-                <Label htmlFor="value">Presentase</Label>
+                <Label htmlFor="value">Buka %</Label>
               </div>
               <div className="flex items-center gap-2">
                 <TextInput
@@ -289,7 +283,7 @@ const SchedulePage = () => {
         unstyled
         className="p-3 sm:p-5 flex flex-col gap-2 divide-y divide-gray-200 bg-slate-100 mt-5 sm:mt-5 rounded">
         {scheduleList && scheduleList.length != 0 ? (
-          scheduleList.map((schedule) => {
+          scheduleList.map((schedule, index) => {
             const findGate = gatesData.find(
               (gate) => gate.id.toString() === schedule.gate_id.toString()
             );
@@ -297,9 +291,9 @@ const SchedulePage = () => {
             if (findGate) {
               return (
                 <ListItem
-                  key={schedule.id}
+                  key={index}
                   className="w-full bg-white gap-2 sm:gap-10 flex justify-between rounded-lg font overflow-hidden shadow-xsh-max">
-                  <div className="grid grid-cols-3 items-center py-3 px-1 w-full justify-between">
+                  <div className="grid grid-cols-3 items-center py-3 px-1 w-full justify-between  text-sm sm:text-base">
                     <div className="border-r border-slate-200">
                       <p className="font-bold sm:text-lg">
                         {findGate.channel_name}
@@ -315,7 +309,7 @@ const SchedulePage = () => {
                   <div className="min-h-full bg-green-200">
                     <ConfirmModal
                       btnClassName={
-                        "rounded-none bg-red-600 text-white px-3 hover:bg-red-800 text-sm h-full"
+                        "rounded-none bg-red-600 text-white px-3 hover:bg-red-800 text-sm h-full text-xs"
                       }
                       btnText={"Hapus"}
                       text={"Apakah anda yakin ingin menghapus jadwal ini?"}

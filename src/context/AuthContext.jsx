@@ -11,7 +11,6 @@ const checkLogin = async () => {
 
     if (res.status === 200) {
       const data = await res.json();
-      console.log(data.user);
       return data.user;
     } else {
       return false;
