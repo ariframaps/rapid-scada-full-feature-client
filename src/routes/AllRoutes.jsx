@@ -1,6 +1,11 @@
-import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { HomePage, LoginPage, ChannelPage, PageNotFound } from "../pages";
+import {
+  HomePage,
+  LoginPage,
+  ChannelPage,
+  PageNotFound,
+  SchedulePage,
+} from "../pages";
 import { useAuth } from "../context/AuthContext";
 
 export const AllRoutes = () => {
@@ -13,6 +18,7 @@ export const AllRoutes = () => {
           element={isLoggedIn ? <HomePage /> : <Navigate to="/login" />}
         />
         <Route path="login" element={<LoginPage />} />
+        <Route path="schedule" element={<SchedulePage />} />
         <Route path={`channel`} element={<Navigate to="/" replace />} />
         <Route
           path={`channel/:id`}

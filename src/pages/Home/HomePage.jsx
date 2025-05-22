@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ChannelPreview from "../../components/ChannelPreview";
 import { allChannels, channelNumbers } from "../../data/data";
-import { Button, ButtonGroup } from "flowbite-react";
+import { Button, ButtonGroup, ArrowRightIcon } from "flowbite-react";
 import ConfirmModal from "../../components/ConfirmModal";
 import LoadingIcon from "../../components/LoadingIcon";
 import { useNavigate } from "react-router-dom";
@@ -185,6 +185,18 @@ const HomePage = () => {
     <div className="w-full flex flex-col gap-5 md:gap-10 md:max-w-5xl m-auto justify-center my-5 md:my-10 px-5 lg:px-0">
       {isLoggedIn.role === "admin" && (
         <div>
+          {isLoggedIn && (
+            <div className="list-none mb-5 sm:mb-10 text-sm w-full flex items-center justify-between gap-5 rounded-xl bg-slate-50 border border-slate-300 p-2 sm:p-4">
+              <p className="text-lg sm:text-2xl font-bold text-start">
+                Jadwal otomatis:
+              </p>
+              <a
+                href="/schedule"
+                className="text-start h-full text-white px-5 py-2 rounded-lg bg-slate-600  hover:bg-gray-900 flex gap-3 items-center">
+                Buat Jadwal Otomatis <ArrowRightIcon />
+              </a>
+            </div>
+          )}
           <ButtonGroup outline className="flex">
             <ConfirmModal
               disabled={closeAll || openAll}

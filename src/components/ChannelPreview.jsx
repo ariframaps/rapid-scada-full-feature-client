@@ -2,11 +2,6 @@ import { ArrowRightIcon, Button, Card } from "flowbite-react";
 import { Gauge, gaugeClasses } from "@mui/x-charts/Gauge";
 
 const ChannelPreview = ({ data, name, disabled = false }) => {
-  // if (prevData) {
-  //   console.log(data.val);
-  //   console.log(prevData.val);
-  // }
-
   let fillColor = "";
   if (data.val <= 33) fillColor = "#52b202";
   else if (data.val > 33 && data.val < 67) fillColor = "#ffb703";

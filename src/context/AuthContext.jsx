@@ -1,6 +1,7 @@
 import { createContext, useContext, useReducer } from "react";
 import { AuthReducer } from "./reducer/AuthReducer";
 import { sendEmail } from "../helper/SendEmail";
+import { useNavigate } from "react-router";
 
 const checkLogin = async () => {
   try {
@@ -28,6 +29,7 @@ const initialState = {
 const AuthContext = createContext(initialState);
 
 export const AuthProvider = ({ children }) => {
+  let navigate = useNavigate();
   const [state, dispatch] = useReducer(AuthReducer, initialState);
 
   async function setLoggedIn(username, password) {
@@ -41,8 +43,10 @@ export const AuthProvider = ({ children }) => {
     if (res.status == 200) {
       console.log("Login berhasil");
       // sendEmail();
+    } else if (res.status == 500) {
+      throw new Error("Silahkan coba lagi");
     } else {
-      throw new Error("Login gagal");
+      throw new Error("Username atau password salah");
     }
 
     const data = await res.json();
@@ -69,7 +73,7 @@ export const AuthProvider = ({ children }) => {
 
     if (res.status == 200) {
       console.log("Logout berhasil");
-      window.location.reload();
+      navigate("/login");
     } else {
       throw new Error("logout gagal");
     }

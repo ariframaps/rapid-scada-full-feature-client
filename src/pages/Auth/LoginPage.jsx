@@ -34,7 +34,7 @@ const LoginPage = () => {
       await setLoggedIn(username, password); // ini ngecek valid atau tidak
       setError(""); // bersihin error kalau sebelumnya ada
     } catch (err) {
-      setError("Username atau password salah.");
+      setError(err.message);
       setIsLoading(false);
     }
   };
