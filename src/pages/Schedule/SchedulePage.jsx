@@ -101,6 +101,12 @@ const SchedulePage = () => {
     // jika ada gate dan tidak ada yang sama maka
     if (channelNum) {
       setIsLoading(true);
+      console.log({
+        gate_id: e.target.gates.value,
+        value: e.target.value.value,
+        scheduled_time: e.target.time.value,
+        channel_name: channelNum.channel_number,
+      });
       try {
         const res = await fetch("/api/api/schedule/add", {
           method: "POST",
@@ -110,7 +116,7 @@ const SchedulePage = () => {
             gate_id: e.target.gates.value,
             value: e.target.value.value,
             scheduled_time: e.target.time.value,
-            channelNum: channelNum.channel_number,
+            channel_number: channelNum.channel_number,
           }),
         });
         //   gate_id, value, scheduled_time, channelNum
