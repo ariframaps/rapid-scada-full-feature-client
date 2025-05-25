@@ -14,8 +14,6 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, ""), // hapus '/api' biar path asli dipake
       },
     },
-    allowedHosts: [
-      "rapid-scada-full-feature-client-production.up.railway.app/",
-    ],
+    allowedHosts: ["rapid-scada-full-feature-client-production.up.railway.app"],
   },
 });
