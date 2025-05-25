@@ -15,7 +15,7 @@ export default defineConfig({
       },
     },
     allowedHosts: [
-      "e5e7-2001-448a-c020-5e9-844d-1f45-c6e7-872c.ngrok-free.app",
+      "rapid-scada-full-feature-client-production.up.railway.app/",
     ],
   },
 });
